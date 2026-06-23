@@ -1,0 +1,77 @@
+{
+  "seed": 123,
+  "device": "cuda",
+  "paths": {
+    "project_root": ".",
+    "runs_dir": "runs"
+  },
+  "code": {
+    "family": "rm",
+    "m": 10,
+    "r": 2,
+    "generator_artifact": "artifacts/rm_10_2/G.pt",
+    "dtype": "float32"
+  },
+  "projections": {
+    "artifact": "artifacts/rm_10_2/projections_half512.txt",
+    "expected_count": 512,
+    "m": 10
+  },
+  "decoder": {
+    "backend": "order2_unfolded",
+    "num_unfolded_steps": 5,
+    "bottom_decoder": "hadamard_order1",
+    "debug_checks": false,
+    "collect_debug": false
+  },
+  "routing": {
+    "policy": "input_dependent_router",
+    "router": "mlp",
+    "hidden_size": 256,
+    "use_layer_norm": false,
+    "activation": "relu",
+    "selection_scope": "full",
+    "execution_mode": "compute_all_mask",
+    "top_k": 128
+  },
+  "channel_train": {
+    "name": "awgn",
+    "snr": 1.0
+  },
+  "validation": {
+    "phase": "validation",
+    "num_batches": 100,
+    "batch_size": 32,
+    "snr": 1.0
+  },
+  "final_eval": {
+    "phase": "final_eval",
+    "num_batches": 320,
+    "batch_size": 32,
+    "snr": 1.0,
+    "model_source": "best_checkpoint"
+  },
+  "training": {
+    "enabled": true,
+    "strategy": "layerwise",
+    "epochs": 1,
+    "steps_per_epoch": 100,
+    "batch_size": 32,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "loss": {
+      "components": [
+        {
+          "name": "bce_logits",
+          "weight": 1.0
+        }
+      ]
+    },
+    "checkpoint_policy": "bler_primary_with_ber_tiebreaker",
+    "forward_depth_policy": "local_depth",
+    "frozen_policy": "frozen_weights"
+  },
+  "logging": {
+    "experiment_name": "adaptive_default"
+  }
+}
