@@ -1,0 +1,60 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+pixi.toml
+pixi.lock
+
+# vs environments
+.vscode/*
+
+# claude
+.claude/*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+plain/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# LaTex
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cbl
+*.cbx
+*.lbg
+*.run.xml
+*.bcf
+*.blg
+*.bbl
+*.brf
+*.nlo
+*.nls
+*.synctex.gz
+*.fdb_latexmk
